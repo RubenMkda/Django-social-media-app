@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<header>
+    <nav>
+        <h1>API PROJECT</h1>
+        <ul>
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Sign up</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+{% endblock %}

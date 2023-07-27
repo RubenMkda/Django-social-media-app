@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}SocialArt{% endblock %}
+
+{% block header %}
+<header>
+    <h1>{{ user.username }}</h1>
+    <a href="{% url 'home' %}">Future Logout</a>
+</header>
+{% endblock %}
+
+{% block content %}
+<main>
+</main>
+{% endblock %}
