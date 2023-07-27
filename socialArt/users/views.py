@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PotsForm
+from .models import Post
+
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -33,8 +35,21 @@ def login_view(request):
 
 @login_required
 def home(request):
+    if request.method == 'POST':
+        form = PotsForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('home')
+    else:
+        form = PotsForm()
+    user = request.user
+    posts = Post.objects.filter(author=user)
+    print(user)
     context = {
-        'title': 'Api projects',
+        'posts': posts,
+        'form' : form,
         }
     return render(request, 'pages/home.html', {'context': context})
 

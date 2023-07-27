@@ -40,3 +40,13 @@ class CustomUser(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
+    
+class Post(models.Model):
+    title = models.CharField(max_length=150)
+    content = models.TextField(max_length=300)
+    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='posts')
+    url_image = models.URLField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

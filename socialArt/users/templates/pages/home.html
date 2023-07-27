@@ -1,15 +1,49 @@
 {% extends "base.html" %}
 
-{% block title %}SocialArt{% endblock %}
+{% block title %} SocialArt {% endblock %}
 
 {% block header %}
 <header>
-    <h1>{{ user.username }}</h1>
-    <a href="{% url 'logout' %}">Logout</a>
+    <nav>
+        <h2>{{ user.username }}</h2>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
 </header>
 {% endblock %}
 
 {% block content %}
 <main>
+
+    <section>
+
+        <header>
+
+            <div>
+                <h3>Historias</h3>
+                <img src="https://www.swissinfo.ch/resource/image/44723544/landscape_ratio3x2/640/426/a86b5f369a9802206f77923ca5c19c94/F6CF3F86D3DAE45ECE23F135347ED9FF/teaser_angleterre_joy_the-bayswater-omnibus_hd-web.jpg"
+                    loading="lazy" alt="" width="300">
+            </div>
+
+            <main>
+                <h3>Subir publicación</h3>
+                {{ context.form.as_p }}
+            </main>
+
+        </header>
+
+        <main>
+
+        </main>
+    </section>
+
+    <section>
+        <h5>Contactos</h5>
+        <main>
+            <div>
+                nombre de amigues
+            </div>
+        </main>
+    </section>
+
 </main>
 {% endblock %}
