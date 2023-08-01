@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-      './templates/**/*.html'
+      './socialArt/users/**/*.html'
   ],
   theme: {
     extend: {},

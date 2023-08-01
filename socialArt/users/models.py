@@ -33,7 +33,7 @@ class CustomUser(AbstractBaseUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
@@ -41,12 +41,8 @@ class CustomUser(AbstractBaseUser):
     def get_short_name(self):
         return self.first_name
     
-class Post(models.Model):
-    title = models.CharField(max_length=150)
+class Posts(models.Model):
     content = models.TextField(max_length=300)
-    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='posts')
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
     url_image = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title

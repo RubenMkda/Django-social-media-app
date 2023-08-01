@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Post
+from .models import CustomUser, Posts
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -18,5 +18,9 @@ class CustomUserCreationForm(UserCreationForm):
     
 class PotsForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['title', 'content', 'url_image']
+        model = Posts
+        fields = ['content', 'url_image']
+        labels = {
+            "content": "",
+            "url_image": "Imagen de la url"
+        }

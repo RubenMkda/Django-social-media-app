@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
 from .forms import CustomUserCreationForm, PotsForm
-from .models import Post
+from .models import Posts
 
 def register_view(request):
     if request.method == 'POST':
@@ -44,12 +44,12 @@ def home(request):
             return redirect('home')
     else:
         form = PotsForm()
-    user = request.user
-    posts = Post.objects.filter(author=user)
-    print(user)
+    user = request.user.id
+    posts = Posts.objects.filter(user=user)
+    print(posts)
     context = {
-        'posts': posts,
         'form' : form,
+        'posts': posts
         }
     return render(request, 'pages/home.html', {'context': context})
 
