@@ -23,6 +23,18 @@
     padding-bottom: 0.4em;
 }
 
+#id_username, #id_password, #id_email, #id_password2, #id_password1{
+    display: inline;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black;
+}
+
 form p{
-    margin-top: .5em;
+    margin-top: 1em;
+}
+
+.helptext{
+    display: none;
 }

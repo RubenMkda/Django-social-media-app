@@ -2,27 +2,40 @@
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
-<div>
-    <section>
-        <h2>Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
-        </form>
-        <div>
-            <div>
-                <h2>Login with</h2>
-                <a href="">Facebook</a>
-                <a href="">Instagram</a>
-                <a href="">Facebook</a>
-            </div>
-            <div>
-                <h2>Do you haven't account?</h2>
-                <a href="{% url 'register' %}">Login</a>
-            </div>
+{% block header %}
+<header class="border-b-8 border-indigo-700 bg-white w-full h-14 fixed top-0 z-50">
+    <nav class="flex items-center justify-between h-full relative">
+        <h2 class="ml-5 uppercase text-2xl font-black"><a href="{% url 'index' %}">SocialArt</a></h2>
+        <div class="relative">
+            <a href="{% url 'login' %}"
+                class="mr-5 border-b-2 border-black transition-all ease-in delay-[10ms] hover:border-amber-600 hover:text-amber-600">Login</a>
+            <a class="mr-5 border-b-2 border-black transition-all ease-in delay-[10ms] hover:border-amber-600 hover:text-amber-600"
+                href="{% url 'register' %}">Sign up</a>
         </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="w-full h-[91vh] bg-neutral-200 mt-14 flex items-center justify-center">
+    <section class="bg-white p-10 h-3/4 flex flex-col items-stretch justify-around">
+        <header>
+            <h2 class="text-3xl font-bold text-center">Login</h2>
+        </header>
+        <main>
+            <form class="flex flex-col items-stretch" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button
+                    class="self-center w-3/4 mt-4 bg-indigo-600 text-slate-200 px-3 py-2 font-bold transition-all ease-in delay-[10ms] hover:bg-indigo-700 capitalize"
+                    type="submit">Login</button>
+            </form>
+        </main>
+        <footer class="flex flex-col items-center justify-center">
+            <h2 class="font-medium">Do you haven't account?</h2>
+            <a class="border-b-2 border-black transition-all ease-in delay-[10ms] hover:border-amber-600 hover:text-amber-600"
+                href="{% url 'register' %}">Sign Up</a>
+        </footer>
     </section>
-</div>
+</main>
 {% endblock %}

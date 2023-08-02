@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'socialArt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'test4',
+        'NAME': 'test5',
     }
 }
 
