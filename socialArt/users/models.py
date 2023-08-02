@@ -1,5 +1,7 @@
-from django.db import models
+from datetime import timedelta
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db import models
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -40,9 +42,51 @@ class CustomUser(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
-    
+
 class Posts(models.Model):
+    id = models.AutoField(primary_key=True)
     content = models.TextField(max_length=300)
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
     url_image = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def num_likes(self):
+        return self.like_set.count()
+    
+class Like(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
+class FriendshipRequest(models.Model):
+    id = models.AutoField(primary_key=True)
+    from_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='friendship_requests_sent')
+    to_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='friendship_requests_received')
+    
+class Friend(models.Model):
+    to_user = models.ForeignKey(CustomUser, models.CASCADE, related_name='friends')
+    from_user = models.ForeignKey(CustomUser, models.CASCADE, related_name='_unused_friend_relation')
+
+class History(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    
+    def save(self, *args, **kwargs):
+        self.expires_at = timezone.now() + timedelta(hours=24)
+        super(History, self).save(*args, **kwargs)
+
+class HistoryPost(models.Model):
+    id = models.AutoField(primary_key=True)
+    content = models.TextField(max_length=300)
+    history = models.ForeignKey(History, on_delete=models.CASCADE)
+    url_image = models.URLField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        super (HistoryPost, self).save(*args, **kwargs)
+        if timezone.now() > self.history.expires_at:
+            self.delete()

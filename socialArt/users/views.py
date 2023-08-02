@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import CustomUserCreationForm, PotsForm
-from .models import Posts
+from .models import Posts, Like, CustomUser, FriendshipRequest, Friend
 
 def register_view(request):
     if request.method == 'POST':
@@ -44,14 +45,66 @@ def home(request):
             return redirect('home')
     else:
         form = PotsForm()
-    user = request.user.id
-    posts = Posts.objects.filter(user=user)
-    print(posts)
+    user = request.user
+    friends = user.friends.all()
+    friend_ids = [friend.from_user.id for friend in friends]
+    posts = Posts.objects.filter(user__in=friend_ids).exclude(user=user)
+    friend_requests = request.user.friendship_requests_received.all()
     context = {
         'form' : form,
-        'posts': posts
+        'posts': posts,
+        'friend_request_received': friend_requests,
+        'friends': friends
         }
     return render(request, 'pages/home.html', {'context': context})
+
+@login_required
+def searh_users(request):
+    query = request.GET.get('q')
+
+    if query:
+        users = CustomUser.objects.filter(Q(username__icontains=query) | Q(email__icontains=query)).exclude(id=request.user.id)
+    else:
+        users = []
+
+    if request.method == 'POST':
+        friend_id = request.POST.get('friend_id')
+        friend = CustomUser.objects.get(id=friend_id)
+        FriendshipRequest.objects.create(from_user=request.user, to_user=friend)
+        return redirect('search')
+
+    return render(request, 'pages/search_users.html', {'users': users})
+
+@login_required
+def accept_friend_request(request, friend_request_id):
+    friend_request = FriendshipRequest.objects.get(id=friend_request_id)
+
+    Friend.objects.create(
+        to_user=request.user,
+        from_user=friend_request.from_user
+    )
+
+    Friend.objects.create(
+        to_user=friend_request.from_user,
+        from_user=request.user
+    )
+
+    friend_request.delete()
+
+    return redirect('home')
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Posts, id=post_id)
+    user = request.user
+
+    if len(Like.objects.filter(user=user, post=post)) == 1:
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    like = Like(user=user, post=post)
+    like.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def index(request):
     return render(request, 'pages/index.html')
