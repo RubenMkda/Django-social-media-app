@@ -70,22 +70,6 @@ class Friend(models.Model):
     to_user = models.ForeignKey(CustomUser, models.CASCADE, related_name='friends')
     from_user = models.ForeignKey(CustomUser, models.CASCADE, related_name='_unused_friend_relation')
 
-class History(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField()
-    
-    def save(self, *args, **kwargs):
-        self.expires_at = timezone.now() + timedelta(hours=24)
-        super(History, self).save(*args, **kwargs)
-
-class HistoryPost(models.Model):
-    id = models.AutoField(primary_key=True)
-    content = models.TextField(max_length=300)
-    history = models.ForeignKey(History, on_delete=models.CASCADE)
-    url_image = models.URLField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
     def save(self, *args, **kwargs):
         super (HistoryPost, self).save(*args, **kwargs)
         if timezone.now() > self.history.expires_at:

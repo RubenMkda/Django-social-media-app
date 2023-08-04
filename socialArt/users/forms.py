@@ -22,5 +22,5 @@ class PotsForm(forms.ModelForm):
         fields = ['content', 'url_image']
         labels = {
             "content": "",
-            "url_image": "Imagen de la url"
+            "url_image": "Image url"
         }
