@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'socialArt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'test5',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'socialart',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
