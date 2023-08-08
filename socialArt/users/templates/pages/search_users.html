@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="flex flex-col items-center w-full">
+<main class="flex flex-col items-center w-full h-[calc(100%-3.5rem)]">
     <h1 class="text-3xl font-black uppercase text-center py-2">SEARCH FOR USERS TO MAKE NEW FRIENDS :D.</h1>
     <form method="get" class="w-full flex items-center justify-center gap-2 w-11/12">
         <input class="w-2/3 py-2 px-2" type="text" name="q" placeholder="Buscar usuarios..."
@@ -23,24 +23,24 @@
             type="submit">Search</button>
     </form>
     {% if users %}
-    <h2>Resultados de la búsqueda:</h2>
-    <table class="w-1/2">
-        <thead class="bg-indigo-600 text-slate-200">
+    <h2 class="py-3 font-bold text-lg">Resultados de la búsqueda:</h2>
+    <table class="w-1/2 max-[768px]:w-11/12">
+        <thead class="bg-indigo-600 text-slate-200 h-14">
             <tr>
-                <th>Name</th>
-                <th>Send request</th>
+                <th class="border-2 border-black">Name</th>
+                <th class="border-2 border-black">Send request</th>
             </tr>
         </thead>
         <tbody class="py-2">
             {% for user in users %}
-            <tr class="bg-white text-center">
-                <td class="border-r-2 border-black my-2">{{ user.username }}</td>
-                <td>
+            <tr class="bg-white text-center h-14 border-2 border-black">
+                <td class="border-b-2 border-r-2 border-black">{{ user.username }}</td>
+                <td class="">
                     <form method="post">
                         {% csrf_token %}
                         <input type="hidden" name="friend_id" value="{{ user.id }}">
                         <button type="submit"
-                            class="bg-indigo-600 text-slate-200 px-3 py-2 font-semibold transition-all ease-in delay-[10ms] hover:bg-indigo-700 capitalize">Send
+                            class="bg-indigo-600 text-slate-200 px-3 py-2 font-semibold  transition-all ease-in delay-[10ms] hover:bg-indigo-700 capitalize">Send
                             Friend Request</button>
                     </form>
                 </td>

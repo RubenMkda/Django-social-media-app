@@ -610,6 +610,11 @@ video {
   z-index: 50;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -618,11 +623,6 @@ video {
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .mb-4 {
@@ -773,10 +773,6 @@ video {
   width: 100%;
 }
 
-.min-w-\[320px\] {
-  min-width: 320px;
-}
-
 .min-w-\[330px\] {
   min-width: 330px;
 }
@@ -863,6 +859,10 @@ video {
   border-radius: 0.25rem;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-b-2 {
   border-bottom-width: 2px;
 }
@@ -873,6 +873,10 @@ video {
 
 .border-r-2 {
   border-right-width: 2px;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
 }
 
 .border-amber-600 {
@@ -984,11 +988,6 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
@@ -1000,10 +999,6 @@ video {
 
 .pb-2 {
   padding-bottom: 0.5rem;
-}
-
-.pr-8 {
-  padding-right: 2rem;
 }
 
 .pt-2 {
@@ -1128,11 +1123,6 @@ video {
 }
 
 @media (max-width: 1024px) {
-  .max-\[1024px\]\:bg-neutral-200 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-  }
-
   .max-\[1024px\]\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -1145,20 +1135,34 @@ video {
     margin-right: 0px;
   }
 
-  .max-\[768px\]\:mt-1 {
-    margin-top: 0.25rem;
-  }
-
   .max-\[768px\]\:mt-2 {
     margin-top: 0.5rem;
+  }
+
+  .max-\[768px\]\:hidden {
+    display: none;
+  }
+
+  .max-\[768px\]\:w-full {
+    width: 100%;
+  }
+
+  .max-\[768px\]\:w-11\/12 {
+    width: 91.666667%;
   }
 
   .max-\[768px\]\:flex-col {
     flex-direction: column;
   }
 
-  .max-\[768px\]\:justify-center {
-    justify-content: center;
+  .max-\[768px\]\:bg-indigo-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+  }
+
+  .max-\[768px\]\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .max-\[768px\]\:text-sm {
@@ -1166,22 +1170,8 @@ video {
     line-height: 1.25rem;
   }
 
-  .max-\[768px\]\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .max-\[600px\]\:bg-neutral-200 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-  }
-}
-
-@media (min-width: 768px) {
-  .md\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
+  .max-\[768px\]\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
