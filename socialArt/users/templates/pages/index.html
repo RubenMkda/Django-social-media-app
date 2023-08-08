@@ -15,14 +15,15 @@
 {% endblock %}
 
 {% block content %}
-<main class="w-full h-[calc(100%-3.5rem)] bg-neutral-200 flex items-center">
-    <section class="w-1/2 flex flex-row-reverse items-center justify-between ml-2">
+<main class="w-full h-[calc(100%-3.5rem)] bg-neutral-200 flex items-center max-[768px]:flex-col max-[768px]:mt-2">
+    <section class="w-1/2 flex flex-row-reverse items-center justify-between ml-2 min-w-[330px] max-[768px]:mx-0">
         <img src="https://www.spain.info/export/sites/segtur/.content/imagenes/reportajes/cataluna/sagrada-familia-interior.jpg"
             alt="portada">
     </section>
-    <section class="w-1/2 flex flex-col gap-2 justify-center -pt-2">
+    <section class="w-1/2 mx-2 flex flex-col gap-2 justify-center py-5 bg-white min-w-[330px] max-[768px]:mx-0">
         <header>
-            <h2 class="text-2xl font-black text-center pr-8 flex flex-col uppercase">
+            <h2
+                class="text-2xl font-black text-center flex flex-col uppercase max-[1024px]:text-xl max-[768px]:text-base ">
                 <span>
                     ART ONLY EXPANDS GREATNESS
                 </span>
@@ -32,14 +33,16 @@
             </h2>
         </header>
         <main class="px-8">
-            <p class="text-lg font-medium">Would you like to share your creativity with the world but don't know how? We
+            <p class="text-lg font-medium max-[1024px]:text-md max-[768px]:text-sm">Would you like to share your
+                creativity with the world
+                but don't know how? We
                 have the perfect solution for you! Our
                 platform offers a space to post people's art, no matter their experience or skill level. Join our
                 community and make
                 your talent shine!
             </p>
         </main>
-        <footer class="px-8 w-full flex items-center justify-center">
+        <footer class="px-8 w-full flex items-center justify-center max-[768px]:text-sm">
             <a href="{% url 'login' %}"
                 class="mr-5 font-semibold border-b-2 border-black transition-all ease-in delay-[10ms] hover:border-amber-600 hover:text-amber-600">Login</a>
             <a class="mr-5 font-semibold border-b-2 border-black transition-all ease-in delay-[10ms] hover:border-amber-600 hover:text-amber-600"
