@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "tailwindcss -i socialArt/users/static/src/input.css -o socialArt/users/static/src/output.css --watch"
+    "dev": "tailwindcss -i socialArt/users/static/tw/tailwind-input.css -o socialArt/users/static/css/output.css --watch"
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "3.3.3"
   }
 }
