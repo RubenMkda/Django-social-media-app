@@ -11,6 +11,8 @@ Joining SocialArt is easy! Simply visit our website rubenbotMkda.pythonanywhere.
 ## Showcase Your Talent
 Showcase your talent on SocialArt by uploading images of your artwork, writing blog posts about your creative process, or even sharing videos of your artistic techniques. Don't worry if you're just starting out or consider yourself an amateur – SocialArt is a judgment-free space that embraces art at every level.
 
+```
 <div style="text-align: center;">
   ![SocialArt](./images/iPhone%2012%20Pro-1691528823686.jpeg)
 </div>
+```
